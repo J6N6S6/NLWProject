@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TechLibrary.Communication.Requests;
 
 namespace TechLibrary.Api.Controllers
 {
@@ -7,15 +8,11 @@ namespace TechLibrary.Api.Controllers
     public class UsersController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult Create(RequestUserJson request)
         {
             return Created();
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok();
-        }
+
     }
 }
