@@ -2,10 +2,20 @@
 
 namespace TechLibrary.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
+        [HttpPost]
+        public IActionResult Create()
+        {
+            return Created();
+        }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok();
+        }
     }
 }
