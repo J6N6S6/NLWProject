@@ -19,7 +19,7 @@ namespace TechLibrary.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)] //Retorno um ResponseRegisteredUserJson com status 201
         public IActionResult Create(RequestUserJson request)
         {  
             ResponseRegisteredUserJson response = _registerUserUseCase.Execute(request);
