@@ -1,3 +1,4 @@
+using TechLibrary.Api.Controllers;
 using TechLibrary.Application.Interfaces.Users;
 using TechLibrary.Application.UseCases.Users.Register;
 
@@ -27,3 +28,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//new UsersController(new RegisterUserUseCase());

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TechLibrary.Application\TechLibrary.Application.csproj" />
     <ProjectReference Include="..\TechLibrary.Communication\TechLibrary.Communication.csproj" />
   </ItemGroup>
 
