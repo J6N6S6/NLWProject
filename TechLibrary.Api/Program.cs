@@ -1,3 +1,6 @@
+using TechLibrary.Application.Interfaces.Users;
+using TechLibrary.Application.UseCases.Users.Register;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -5,6 +8,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
 
 var app = builder.Build();
 
