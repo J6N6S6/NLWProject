@@ -1,5 +1,7 @@
-# NLWProject
+# NLWProject 
 
-## Tech API
+## Tech Library
 
-C# project form the Rocketseat NLW event
+C# project from the Rocketseat NLW event with adaptations made by myself.
+
+Feel free to use and clone.

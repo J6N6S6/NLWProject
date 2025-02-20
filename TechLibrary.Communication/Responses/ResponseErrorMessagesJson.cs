@@ -2,6 +2,6 @@
 {
     public class ResponseErrorMessagesJson
     {
-        public List<string> Errors { get; set; } = new List<string>();
+        public List<string> Errors { get; set; } = [];
     }
 }

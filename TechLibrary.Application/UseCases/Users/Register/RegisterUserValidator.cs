@@ -7,8 +7,16 @@ namespace TechLibrary.Application.UseCases.Users.Register
     {
         public RegisterUserValidator()
         {
-            RuleFor(request => request.Name).NotEmpty().WithMessage("Name is required.");
+            RuleFor(request => request.Name).NotEmpty().WithMessage("Name must be at least 6 characters.");
+            When(request => string.IsNullOrEmpty(request.Name) == false, () =>
+            {
+                RuleFor(request => request.Name).MinimumLength(6).WithMessage("Name must be at least 6 characters.");
+            });
             RuleFor(request => request.Email).NotEmpty().WithMessage("Email is required.");
+            When(request => string.IsNullOrEmpty(request.Email) == false, () =>
+            {
+                RuleFor(request => request.Email).EmailAddress().WithMessage("Invalid email address.");
+            });
             RuleFor(RuleFor => RuleFor.Password).NotEmpty().WithMessage("Password is required.");
             When(request => string.IsNullOrEmpty(request.Password) == false, () =>
             {
