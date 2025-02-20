@@ -1,6 +1,10 @@
-﻿namespace TechLibrary.Exception
+﻿using System.Net;
+
+namespace TechLibrary.Exception
 {
-    internal abstract class TechLibraryException : SystemException
+    public abstract class TechLibraryException : SystemException //Não lanço esta exceção diretamente
     {
+        public abstract List<string> GetErrorMessages();
+        public abstract HttpStatusCode GetStatusCode();
     }
 }
