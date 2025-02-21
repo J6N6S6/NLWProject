@@ -2,6 +2,8 @@
 using TechLibrary.Communication.Responses;
 using TechLibrary.Application.Interfaces.Users;
 using TechLibrary.Exception;
+using TechLibrary.Infrastructure.Data.Domain.Entities;
+using TechLibrary.Infrastructure.Data.Context.SQLite;
 
 namespace TechLibrary.Application.UseCases.Users.Register
 {
@@ -11,7 +13,21 @@ namespace TechLibrary.Application.UseCases.Users.Register
         {
             Validate(request); //Chamo o método Validate passando o request
 
-            return new ResponseRegisteredUserJson { };//Retorno um Json de ResponseRegisteredUserJson com Name e AccessToken
+            var entity = new User
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Password = request.Password
+            };
+
+            var dbContext = new TechLibraryDbContext(); //Instancio um TechLibraryDbContext
+
+            dbContext.Users.Add(entity); //Adiciono a entidade no contexto - cria um insert
+            dbContext.SaveChanges(); //Salvo as alterações - executa o insert
+
+            return new ResponseRegisteredUserJson {
+                Name = entity.Name,
+            };//Retorno um Json de ResponseRegisteredUserJson com Name e AccessToken
         }
 
         private void Validate(RequestUserJson request)
