@@ -22,7 +22,7 @@ namespace TechLibrary.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)] //Retorno um ResponseRegisteredUserJson com status 201
         [ProducesResponseType(typeof(ResponseErrorMessagesJson), StatusCodes.Status400BadRequest)] //Retorno um ResponseErrorMessagesJson com status 400
-        public IActionResult Create(RequestUserJson request)
+        public IActionResult Register(RequestUserJson request)
         {
             try
             {
@@ -34,9 +34,9 @@ namespace TechLibrary.Api.Controllers
             {
                 return BadRequest(new ResponseErrorMessagesJson { Errors = ex.GetErrorMessages()});
             }
-            catch
+            catch (System.Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessagesJson { Errors = ["Unhandled Exception"] });
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessagesJson { Errors = ["Unhandled Exception " + ex.Message] });
             }
         }
     }

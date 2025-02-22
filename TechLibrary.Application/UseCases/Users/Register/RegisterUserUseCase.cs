@@ -1,9 +1,10 @@
-﻿using TechLibrary.Communication.Requests;
+﻿using TechLibrary.Application.Interfaces.Users;
+using TechLibrary.Communication.Requests;
 using TechLibrary.Communication.Responses;
-using TechLibrary.Application.Interfaces.Users;
 using TechLibrary.Exception;
-using TechLibrary.Infrastructure.Data.Domain.Entities;
 using TechLibrary.Infrastructure.Data.Context.SQLite;
+using TechLibrary.Infrastructure.Data.Domain.Entities;
+using TechLibrary.Infrastructure.Security.Criptography;
 
 namespace TechLibrary.Application.UseCases.Users.Register
 {
@@ -13,11 +14,13 @@ namespace TechLibrary.Application.UseCases.Users.Register
         {
             Validate(request); //Chamo o método Validate passando o request
 
+            var cryptography = new BCryptAlgorithm(); //Instancio um BCryptAlgorithm
+
             var entity = new User
             {
                 Name = request.Name,
                 Email = request.Email,
-                Password = request.Password
+                Password = cryptography.HashPassword(request.Password), //Crio um novo usuário com Name, Email e Password criptografado
             };
 
             var dbContext = new TechLibraryDbContext(); //Instancio um TechLibraryDbContext
