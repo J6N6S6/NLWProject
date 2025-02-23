@@ -17,17 +17,12 @@ namespace TechLibrary.Api.Controllers
         }
 
         [HttpPost] //Post para login para receber um RequestLoginJson
+        [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)] //Retorno um ResponseRegisteredUserJson com status 201
+        [ProducesResponseType(typeof(ResponseErrorMessagesJson), StatusCodes.Status500InternalServerError)] //Retorno um ResponseErrorMessagesJson com status 400
         public IActionResult DoLogin(RequestLoginJson request)
         {
-            try
-            {
-                var response = _doLoginUseCase.Execute(request);
-                return Ok(response);
-            }
-            catch (System.Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessagesJson { Errors = ["Unhandled exception" + ex.Message] });
-            }
+            var response = _doLoginUseCase.Execute(request);
+            return Ok(response);
         }
     }
 }

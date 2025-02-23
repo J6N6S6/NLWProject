@@ -24,20 +24,9 @@ namespace TechLibrary.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorMessagesJson), StatusCodes.Status400BadRequest)] //Retorno um ResponseErrorMessagesJson com status 400
         public IActionResult Register(RequestUserJson request)
         {
-            try
-            {
-                var response = _registerUserUseCase.Execute(request);
+            var response = _registerUserUseCase.Execute(request);
 
-                return Created(string.Empty, response);
-            }
-            catch (TechLibraryException ex)
-            {
-                return BadRequest(new ResponseErrorMessagesJson { Errors = ex.GetErrorMessages()});
-            }
-            /*catch (System.Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessagesJson { Errors = ["Unhandled Exception " + ex.Message] });
-            }*/
+            return Created(string.Empty, response);
         }
     }
 }

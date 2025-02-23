@@ -1,4 +1,5 @@
 using TechLibrary.Api.Controllers;
+using TechLibrary.Api.Filters;
 using TechLibrary.Application.Interfaces.Login.DoLogin;
 using TechLibrary.Application.Interfaces.Users;
 using TechLibrary.Application.UseCases.Login.DoLogin;
@@ -11,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
 builder.Services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();

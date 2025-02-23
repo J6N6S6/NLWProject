@@ -1,6 +1,26 @@
-﻿namespace TechLibrary.Api.Filters
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using TechLibrary.Communication.Responses;
+using TechLibrary.Exception;
+
+namespace TechLibrary.Api.Filters
 {
-    public class ExceptionFilter
+    public class ExceptionFilter : IExceptionFilter
     {
+        public void OnException(ExceptionContext context)
+        {
+            if (context.Exception is TechLibraryException techLibraryException)
+            {
+                context.HttpContext.Response.StatusCode = (int)(techLibraryException).GetStatusCode();
+                context.Result = new ObjectResult(new ResponseErrorMessagesJson { Errors = techLibraryException.GetErrorMessages() });
+                context.ExceptionHandled = true;
+            }
+            else
+            {
+                context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                context.Result = new ObjectResult(new ResponseErrorMessagesJson { Errors = ["Unhandled exception" + context.Exception.Message] });
+                context.ExceptionHandled = true;
+            }
+        }
     }
 }
