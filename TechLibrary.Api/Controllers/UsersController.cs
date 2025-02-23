@@ -34,10 +34,10 @@ namespace TechLibrary.Api.Controllers
             {
                 return BadRequest(new ResponseErrorMessagesJson { Errors = ex.GetErrorMessages()});
             }
-            catch (System.Exception ex)
+            /*catch (System.Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessagesJson { Errors = ["Unhandled Exception " + ex.Message] });
-            }
+            }*/
         }
     }
 }

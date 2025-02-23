@@ -19,8 +19,8 @@ namespace TechLibrary.Infrastructure.Security.Tokens.Access
             var tokenDescriptor = new SecurityTokenDescriptor //Precisamos descrever o token
             {
                 Expires = DateTime.UtcNow.AddMinutes(30),
-                SigningCredentials = new SigningCredentials(SecurityKey(), SecurityAlgorithms.HmacSha256Signature),
-                Subject = new ClaimsIdentity(claims) //Identidade do token
+                Subject = new ClaimsIdentity(claims), //Identidade do token
+                SigningCredentials = new SigningCredentials(SecurityKey(), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler(); //Manipulador de token JWT
