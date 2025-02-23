@@ -1,7 +1,9 @@
 using TechLibrary.Api.Controllers;
 using TechLibrary.Api.Filters;
+using TechLibrary.Application.Interfaces.Books;
 using TechLibrary.Application.Interfaces.Login.DoLogin;
 using TechLibrary.Application.Interfaces.Users;
+using TechLibrary.Application.UseCases.Books;
 using TechLibrary.Application.UseCases.Login.DoLogin;
 using TechLibrary.Application.UseCases.Users.Register;
 
@@ -17,6 +19,7 @@ builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)))
 
 builder.Services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
 builder.Services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+builder.Services.AddScoped<IFilterBooksUseCase, FilterBooksUseCase>();
 
 var app = builder.Build();
 

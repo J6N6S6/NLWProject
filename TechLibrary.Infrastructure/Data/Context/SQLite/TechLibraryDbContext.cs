@@ -6,6 +6,7 @@ namespace TechLibrary.Infrastructure.Data.Context.SQLite
     public class TechLibraryDbContext : DbContext
     {
         public DbSet<User> Users { get; set; } //A propriedade deve ter o nome da tabela no banco de dados
+        public DbSet<Book> Books { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
