@@ -6,6 +6,7 @@ using TechLibrary.Infrastructure.Data.Context.SQLite;
 using TechLibrary.Infrastructure.Data.Domain.Entities;
 using TechLibrary.Infrastructure.Security.Criptography;
 using FluentValidation.Results;
+using TechLibrary.Infrastructure.Security.Tokens.Access;
 
 namespace TechLibrary.Application.UseCases.Users.Register
 {
@@ -26,13 +27,15 @@ namespace TechLibrary.Application.UseCases.Users.Register
                 Password = cryptography.HashPassword(request.Password), //Crio um novo usuário com Name, Email e Password criptografado
             };
 
-
             dbContext.Users.Add(entity); //Adiciono a entidade no contexto - cria um insert
             dbContext.SaveChanges(); //Salvo as alterações - executa o insert
+            
+            var tokenGenerator = new JwtTokenGenerator(); //Instancio um JwtTokenGenerator
 
             return new ResponseRegisteredUserJson {
                 Name = entity.Name,
-            };//Retorno um Json de ResponseRegisteredUserJson com Name e AccessToken
+                AccessToken = tokenGenerator.Generate(entity) //Retorno um Json de ResponseRegisteredUserJson com Name e AccessToken
+            };
         }
 
         private void Validate(RequestUserJson request, TechLibraryDbContext dbContext)

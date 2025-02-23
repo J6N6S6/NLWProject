@@ -1,4 +1,7 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using TechLibrary.Infrastructure.Data.Domain.Entities;
 
 namespace TechLibrary.Infrastructure.Security.Tokens.Access
@@ -7,16 +10,32 @@ namespace TechLibrary.Infrastructure.Security.Tokens.Access
     {
         public string Generate(User user)
         {
+            var claims = new List<Claim> //Precisamos de uma lista de claims para o token, o claim é uma informação sobre o usuário
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), //Id do usuário, não quero expor os outros dados do usuário,
+                                                                          //colocar valor que não seja sensível ou alterável
+            };
+
             var tokenDescriptor = new SecurityTokenDescriptor //Precisamos descrever o token
             {
                 Expires = DateTime.UtcNow.AddMinutes(30),
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Role, user.Role)
-                }),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey")), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(SecurityKey(), SecurityAlgorithms.HmacSha256Signature),
+                Subject = new ClaimsIdentity(claims) //Identidade do token
             };
+
+            var tokenHandler = new JwtSecurityTokenHandler(); //Manipulador de token JWT
+
+            var securityToken = tokenHandler.CreateToken(tokenDescriptor); //Criar token com base na descrição
+
+            return tokenHandler.WriteToken(securityToken); //Retornar token gerado em string
+        }
+
+        private static SymmetricSecurityKey SecurityKey()
+        {
+            string secretKey = "Maple é a melhor cachorra do mundo!";
+
+
+            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
         }
     }
 }
