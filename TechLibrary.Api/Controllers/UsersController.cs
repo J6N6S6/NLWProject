@@ -1,10 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TechLibrary.Application.Interfaces.Users;
-using TechLibrary.Application.UseCases.Users.Register;
 using TechLibrary.Communication.Requests;
 using TechLibrary.Communication.Responses;
-using TechLibrary.Exception;
 
 namespace TechLibrary.Api.Controllers
 {
