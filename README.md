@@ -168,9 +168,13 @@ Sinta-se à vontade para contribuir com o projeto! Basta seguir os passos abaixo
 
 ## <span style="color:green">Autor</span>
 
-**Nome:** Jonas
+**Nome:** Jonas dos Santos Candeias
 
-**LinkedIn:** Seu LinkedIn
+[**LinkedIn**](https://www.linkedin.com/in/scjonas/)
 
-**GitHub:** Seu GitHub
+[**GitHub**](https://github.com/J6N6S6)
+
+## <span style="color:green">Abstract</span>
+
+*TechLibrary is a C# .NET project developed during the NLW Connect - C# event by Rocketseat, with custom adaptations and improvements. The project is a virtual library API that allows user registration, login, book borrowing, and book search functionalities. It follows a layered architecture, utilizing Dependency Injection, FluentValidation for data validation, JWT for authentication, and Entity Framework Core for database management. The project is fully versioned with Git and includes comprehensive error handling and Swagger documentation for easy testing and integration.*
 
