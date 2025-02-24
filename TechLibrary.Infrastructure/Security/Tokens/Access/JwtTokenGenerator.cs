@@ -34,7 +34,6 @@ namespace TechLibrary.Infrastructure.Security.Tokens.Access
         {
             string secretKey = "Maple é a melhor cachorra do mundo!";
 
-
             return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
         }
     }

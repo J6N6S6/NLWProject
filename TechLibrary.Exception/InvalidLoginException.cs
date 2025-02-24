@@ -4,7 +4,9 @@ namespace TechLibrary.Exception
 {
     public class InvalidLoginException : TechLibraryException
     {
-        public override List<string> GetErrorMessages() => ["Email and/or password are invalid"];
+        public InvalidLoginException() : base("Email and/or password are invalid") { }
+
+        public override List<string> GetErrorMessages() => [Message];
 
         public override HttpStatusCode GetStatusCode() => HttpStatusCode.Unauthorized;
     }
